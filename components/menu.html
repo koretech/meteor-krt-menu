@@ -1,0 +1,33 @@
+<template name="ktMenuMenu">
+	{{#with menu}}
+	<nav class="ui menu {{classes}}">
+		{{#each items}}
+			{{> Template.dynamic template=type}}
+		{{/each}}
+	</nav>
+	{{/with}}
+</template>
+
+<template name="ktMenuStaticItem">
+	<div class="item {{classes}}">
+		{{#if icon}}{{> ktMenuIcon}}{{/if}} {{text}}
+	</div>
+</template>
+
+<template name="ktMenuLinkItem">
+	<a class="item {{classes}}" href="{{pathFor link}}">
+		{{#if icon}}{{> ktMenuIcon}}{{/if}} {{text}}
+	</a>
+</template>
+
+<template name="ktMenuDropdownItem">
+	<div class="ui simple dropdown item {{classes}}">
+		{{#if icon}}{{> ktMenuIcon}}{{/if}} {{text}}
+		<i class="dropdown icon"></i>
+		{{> ktMenuMenu menu=childMenu}}
+	</div>
+</template>
+
+<template name="ktMenuIcon">
+	<i class="{{icon}}"></i>
+</template>
