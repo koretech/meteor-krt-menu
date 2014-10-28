@@ -8,7 +8,7 @@ Package.describe({
 Package.onUse(function(api){
 
 	api.use([
-		'kt-core@0.1.0',
+		'krt-core@0.1.0',
 		'templating',
 		'session',
 		'underscore',
@@ -16,7 +16,8 @@ Package.onUse(function(api){
 	], both);
 
 	api.imply([
-		'iron:router@1.0.0-pre4'
+		'iron:router@1.0.0-pre4',
+		'krt-core'
 	]);
 
 	api.addFiles([

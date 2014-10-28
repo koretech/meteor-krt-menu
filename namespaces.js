@@ -1,5 +1,5 @@
 /**
  * @namespace
- * @alias KT.Menu
+ * @alias KRT.Menu
  */
-KT.Menu = {};
+KRT.Menu = {};

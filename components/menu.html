@@ -1,4 +1,4 @@
-<template name="ktMenuMenu">
+<template name="krtMenuMenu">
 	{{#with menu}}
 	<nav class="ui menu {{classes}}">
 		{{#each items}}
@@ -8,26 +8,26 @@
 	{{/with}}
 </template>
 
-<template name="ktMenuStaticItem">
+<template name="krtMenuStaticItem">
 	<div class="item {{classes}}">
-		{{#if icon}}{{> ktMenuIcon}}{{/if}} {{text}}
+		{{#if icon}}{{> krtMenuIcon}}{{/if}} {{text}}
 	</div>
 </template>
 
-<template name="ktMenuLinkItem">
+<template name="krtMenuLinkItem">
 	<a class="item {{classes}}" href="{{pathFor link}}">
-		{{#if icon}}{{> ktMenuIcon}}{{/if}} {{text}}
+		{{#if icon}}{{> krtMenuIcon}}{{/if}} {{text}}
 	</a>
 </template>
 
-<template name="ktMenuDropdownItem">
+<template name="krtMenuDropdownItem">
 	<div class="ui simple dropdown item {{classes}}">
-		{{#if icon}}{{> ktMenuIcon}}{{/if}} {{text}}
+		{{#if icon}}{{> krtMenuIcon}}{{/if}} {{text}}
 		<i class="dropdown icon"></i>
-		{{> ktMenuMenu menu=childMenu}}
+		{{> krtMenuMenu menu=childMenu}}
 	</div>
 </template>
 
-<template name="ktMenuIcon">
+<template name="krtMenuIcon">
 	<i class="{{icon}}"></i>
 </template>

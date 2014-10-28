@@ -1,4 +1,4 @@
-KT.Menu._menus = {};
+KRT.Menu._menus = {};
 
 /**
  * The Menu class
@@ -17,7 +17,7 @@ Menu = function(params) {
 	this._items = [];
 
 	// Register with namespace
-	KT.Menu._menus[this._name] = this;
+	KRT.Menu._menus[this._name] = this;
 };
 
 /**
@@ -41,4 +41,4 @@ Menu.prototype.classes = function() {
 };
 
 // Namespace defines
-KT.Menu.Menu = Menu;
+KRT.Menu.Menu = Menu;

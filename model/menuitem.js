@@ -29,9 +29,9 @@ MenuItem = function(params) {
  */
 MenuItem.prototype.type = function() {
 	switch (this.params.type) {
-		case 'dropdown': return 'ktMenuDropdownItem'; break;
-		case 'link': return 'ktMenuLinkItem'; break;
-		default: return 'ktMenuStaticItem'; break;
+		case 'dropdown': return 'krtMenuDropdownItem'; break;
+		case 'link': return 'krtMenuLinkItem'; break;
+		default: return 'krtMenuStaticItem'; break;
 	}
 };
 
@@ -90,7 +90,7 @@ MenuItem.prototype.childMenu = function() {
 };
 
 // Namespace defines
-KT.Menu.MenuItem = MenuItem;
-KT.Menu.StaticItem = StaticItem;
-KT.Menu.LinkItem = LinkItem;
-KT.Menu.DropdownItem = DropdownItem;
+KRT.Menu.MenuItem = MenuItem;
+KRT.Menu.StaticItem = StaticItem;
+KRT.Menu.LinkItem = LinkItem;
+KRT.Menu.DropdownItem = DropdownItem;
