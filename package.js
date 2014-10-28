@@ -9,8 +9,10 @@ Package.describe({
 
 Package.onUse(function(api){
 
+	api.versionsFrom('METEOR@0.9.4');
+
 	api.use([
-		'krt-core@0.1.0',
+		'krt:core@0.1.0',
 		'templating',
 		'session',
 		'underscore',
@@ -19,7 +21,7 @@ Package.onUse(function(api){
 
 	api.imply([
 		'iron:router@1.0.0-pre4',
-		'krt-core'
+		'krt-core@0.1.0'
 	]);
 
 	api.addFiles([
