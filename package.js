@@ -1,8 +1,10 @@
 var client = 'client', server = 'server', both = ['client', 'server'];
 
 Package.describe({
-	summary: "Koretech Menu Package",
-	version: '0.1.0'
+	name: 'krt:menu',
+	summary: 'Koretech Menu Package',
+	version: '0.1.0',
+	git: 'https://github.com/koretech/meteor-krt-menu.git'
 });
 
 Package.onUse(function(api){
