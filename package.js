@@ -21,7 +21,7 @@ Package.onUse(function(api){
 
 	api.imply([
 		'iron:router@1.0.0-pre4',
-		'krt-core@0.1.0'
+		'krt:core@0.1.0'
 	]);
 
 	api.addFiles([
