@@ -16,6 +16,7 @@ Package.onUse(function(api){
 		'templating',
 		'session',
 		'underscore',
+		'tracker',
 		'iron:router@1.0.0-pre4'
 	], both);
 

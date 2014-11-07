@@ -7,17 +7,16 @@ KRT.Menu._menus = {};
  * @constructor
  */
 Menu = function(params) {
-	if (this instanceof Menu) {
-		this.params = params;
-	} else {
-		return new Menu(params);
-	}
+	if (!(this instanceof Menu)) return new Menu(params);
 
-	this._name = this.params.name || _.uniqueId('menu_');
+	this._name = params.name || _.uniqueId('menu_');
+	this._classes = params.classes || '';
 	this._items = [];
 
 	// Register with namespace
 	KRT.Menu._menus[this._name] = this;
+
+	this.dep = new Tracker.Dependency;
 };
 
 /**
@@ -26,18 +25,24 @@ Menu = function(params) {
  */
 Menu.prototype.addItem = function(item) {
 	this._items.push(item);
+	this.dep.changed();
 };
 
 Menu.prototype.items = function() {
+	if (Tracker.active) this.dep.depend();
 	return this._items;
 };
 
 Menu.prototype.name = function() {
-	return this.name;
+	return this._name;
 };
 
 Menu.prototype.classes = function() {
-	return this.params.classes;
+	if (Tracker.active) this.dep.depend();
+	if (typeof this._classes === 'function')	{
+		return this._classes();
+	}
+	return this._classes;
 };
 
 // Namespace defines

@@ -15,12 +15,17 @@ DropdownItem = function(params) {
  * @constructor
  */
 MenuItem = function(params) {
-	if (this instanceof MenuItem) {
-		this.params = params;
-	} else {
-		return new MenuItem(params);
-	}
+	if (!(this instanceof MenuItem)) return new MenuItem(params);
 
+	this._type = params.type || 'static';
+	this._text = params.text || '';
+	this._icon = params.icon || '';
+	this._classes = params.classes || '';
+	this._link = params.link || '';
+	this._menu = params.menu || null;
+	this._visible = params.visible || true;
+
+	this.dep = new Tracker.Dependency;
 };
 
 /**
@@ -28,7 +33,7 @@ MenuItem = function(params) {
  * @returns {string}
  */
 MenuItem.prototype.type = function() {
-	switch (this.params.type) {
+	switch (this._type) {
 		case 'dropdown': return 'krtMenuDropdownItem'; break;
 		case 'link': return 'krtMenuLinkItem'; break;
 		default: return 'krtMenuStaticItem'; break;
@@ -37,41 +42,50 @@ MenuItem.prototype.type = function() {
 
 /**
  * Return the item's text or blank if not set
+ * @reactive
  * @returns {string}
  */
 MenuItem.prototype.text = function() {
-	if (typeof this.params.text === 'function')	{
-		return this.params.text();
+	if (Tracker.active) this.dep.depend();
+
+	if (typeof this._text === 'function')	{
+		return this._text();
 	}
-	return this.params.text;
+	return this._text;
 };
 
 /**
  * Returns the item's icon as a string of CSS class names
+ * @reactive
  * @returns {string}
  */
 MenuItem.prototype.icon = function() {
-	if (typeof this.params.icon === 'function') {
-		return this.params.icon();
+	if (Tracker.active) this.dep.depend();
+
+	if (typeof this._icon === 'function') {
+		return this._icon();
 	}
-	return this.params.icon;
+	return this._icon;
 };
 
 /**
  * Returns the item's extra classes.
  * If the item is a link will return 'active' appended if the current route matches the link
+ * @reactive
  * @returns {string}
  */
 MenuItem.prototype.classes = function() {
+	if (Tracker.active) this.dep.depend();
+
 	var classes;
-	if (typeof this.params.classes === 'function') {
-		classes = this.params.classes();
+	if (typeof this._classes === 'function') {
+		classes = this._classes();
 	} else {
-		classes = this.params.classes;
+		classes = this._classes;
 	}
-	if (this.params.type === 'link' &&
+	if (this._type === 'link' &&
 		Router.current() &&
-		this.params.link === Router.current().route.getName()) {
+		this._link === Router.current().route.getName()) {
 		return classes + ' active';
 	}
 	return classes;
@@ -79,14 +93,33 @@ MenuItem.prototype.classes = function() {
 
 /**
  * Returns the item's link
+ * @reactive
  * @returns {string}
  */
 MenuItem.prototype.link = function() {
-	return this.params.link;
+	if (Tracker.active) this.dep.depend();
+
+	if (typeof this._link === 'function') {
+		return this._link();
+	}
+	return this._link;
 };
 
-MenuItem.prototype.childMenu = function() {
-	return this.params.childMenu;
+/**
+ * Returns a sub menu associated with this item
+ * @returns {KRT.Menu}
+ */
+MenuItem.prototype.menu = function() {
+	return this._menu;
+};
+
+MenuItem.prototype.isVisible = function() {
+	if (Tracker.active) this.dep.depend();
+
+	if (typeof this._visible === 'function') {
+		return this._visible(Meteor.user());
+	}
+	return this._visible;
 };
 
 // Namespace defines
@@ -94,3 +127,5 @@ KRT.Menu.MenuItem = MenuItem;
 KRT.Menu.StaticItem = StaticItem;
 KRT.Menu.LinkItem = LinkItem;
 KRT.Menu.DropdownItem = DropdownItem;
+
+KRT.Menu.whenLoggedIn = function(user) { return !!user; };

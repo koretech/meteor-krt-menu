@@ -2,7 +2,9 @@
 	{{#with menu}}
 	<nav class="ui menu {{classes}}">
 		{{#each items}}
-			{{> Template.dynamic template=type}}
+			{{#if isVisible}}
+				{{> Template.dynamic template=type}}
+			{{/if}}
 		{{/each}}
 	</nav>
 	{{/with}}
@@ -24,7 +26,7 @@
 	<div class="ui simple dropdown item {{classes}}">
 		{{#if icon}}{{> krtMenuIcon}}{{/if}} {{text}}
 		<i class="dropdown icon"></i>
-		{{> krtMenuMenu menu=childMenu}}
+		{{> krtMenuMenu name=menu.name}}
 	</div>
 </template>
 
