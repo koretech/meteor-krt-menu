@@ -6,6 +6,13 @@
 				{{> Template.dynamic template=type}}
 			{{/if}}
 		{{/each}}
+		{{#if rightItems}}<nav class="right menu">
+			{{#each rightItems}}
+				{{#if isVisible}}
+					{{> Template.dynamic template=type}}
+				{{/if}}
+			{{/each}}
+		</nav>{{/if}}
 	</nav>
 	{{/with}}
 </template>
@@ -17,7 +24,7 @@
 </template>
 
 <template name="krtMenuLinkItem">
-	<a class="item {{classes}}" href="{{pathFor link}}">
+	<a class="item {{classes}} {{#if tooltip}}tooltip{{/if}}" href="{{pathFor link}}" title="{{tooltip}}">
 		{{#if icon}}{{> krtMenuIcon}}{{/if}} {{text}}
 	</a>
 </template>
@@ -25,7 +32,7 @@
 <template name="krtMenuDropdownItem">
 	<div class="ui simple dropdown item {{classes}}">
 		{{#if icon}}{{> krtMenuIcon}}{{/if}} {{text}}
-		<i class="dropdown icon"></i>
+		{{#unless hideArrowIcon}}<i class="dropdown icon"></i>{{/unless}}
 		{{> krtMenuMenu name=menu.name}}
 	</div>
 </template>

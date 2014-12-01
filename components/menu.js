@@ -1,8 +1,3 @@
-//Template.krtMenuMenu.created = function(){
-	//If just name is passed lookup the menu
-	//if (this.data.name) this.data.menu = KRT.Menu._menus[this.data.name];
-//};
-
 Template.krtMenuMenu.helpers({
 
 	menu: function() {
@@ -11,3 +6,7 @@ Template.krtMenuMenu.helpers({
 	}
 
 });
+
+Template.krtMenuLinkItem.rendered = function() {
+	this.$('.item.tooltip').popup();
+};

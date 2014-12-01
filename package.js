@@ -3,13 +3,13 @@ var client = 'client', server = 'server', both = ['client', 'server'];
 Package.describe({
 	name: 'krt:menu',
 	summary: 'Koretech Menu Package',
-	version: '0.1.0',
+	version: '0.1.1',
 	git: 'https://github.com/koretech/meteor-krt-menu.git'
 });
 
 Package.onUse(function(api){
 
-	api.versionsFrom('METEOR@0.9.4');
+	api.versionsFrom('METEOR@1.0');
 
 	api.use([
 		'krt:core@0.1.0',
@@ -17,12 +17,12 @@ Package.onUse(function(api){
 		'session',
 		'underscore',
 		'tracker',
-		'iron:router@1.0.0-pre4'
+		'iron:router@1.0.3'
 	], both);
 
 	api.imply([
-		'iron:router@1.0.0-pre4',
-		'krt:core@0.1.0'
+		'iron:router',
+		'krt:core'
 	]);
 
 	api.addFiles([

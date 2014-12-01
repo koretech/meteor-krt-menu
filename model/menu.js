@@ -12,6 +12,7 @@ Menu = function(params) {
 	this._name = params.name || _.uniqueId('menu_');
 	this._classes = params.classes || '';
 	this._items = [];
+	this._rightItems = [];
 
 	// Register with namespace
 	KRT.Menu._menus[this._name] = this;
@@ -24,13 +25,22 @@ Menu = function(params) {
  * @param item
  */
 Menu.prototype.addItem = function(item) {
-	this._items.push(item);
+	if (item.align() == 'right') {
+		this._rightItems.push(item);
+	} else {
+		this._items.push(item);
+	}
 	this.dep.changed();
 };
 
 Menu.prototype.items = function() {
 	if (Tracker.active) this.dep.depend();
 	return this._items;
+};
+
+Menu.prototype.rightItems = function() {
+	if (Tracker.active) this.dep.depend();
+	return this._rightItems;
 };
 
 Menu.prototype.name = function() {

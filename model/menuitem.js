@@ -19,11 +19,14 @@ MenuItem = function(params) {
 
 	this._type = params.type || 'static';
 	this._text = params.text || '';
+	this._tooltip = params.tooltip || '';
 	this._icon = params.icon || '';
 	this._classes = params.classes || '';
 	this._link = params.link || '';
 	this._menu = params.menu || null;
 	this._visible = params.visible || true;
+	this._align = params.align || 'left';
+	this._hideArrowIcon = params.hideArrowIcon || false;
 
 	this.dep = new Tracker.Dependency;
 };
@@ -52,6 +55,15 @@ MenuItem.prototype.text = function() {
 		return this._text();
 	}
 	return this._text;
+};
+
+MenuItem.prototype.tooltip = function() {
+	if (Tracker.active) this.dep.depend();
+
+	if (typeof this._tooltip === 'function')	{
+		return this._tooltip();
+	}
+	return this._tooltip;
 };
 
 /**
@@ -120,6 +132,14 @@ MenuItem.prototype.isVisible = function() {
 		return this._visible(Meteor.user());
 	}
 	return this._visible;
+};
+
+MenuItem.prototype.align = function() {
+	return this._align;
+};
+
+MenuItem.prototype.hideArrowIcon = function() {
+	return this._hideArrowIcon;
 };
 
 // Namespace defines
