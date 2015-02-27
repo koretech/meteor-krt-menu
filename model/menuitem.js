@@ -97,6 +97,7 @@ MenuItem.prototype.classes = function() {
 	}
 	if (this._type === 'link' &&
 		Router.current() &&
+		Router.current().route &&
 		this._link === Router.current().route.getName()) {
 		return classes + ' active';
 	}
